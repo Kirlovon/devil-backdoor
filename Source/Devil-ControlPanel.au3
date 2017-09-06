@@ -16,10 +16,14 @@
 #include <WindowsConstants.au3>
 
 ; The program will not start twice
-_Singleton("devil_check", 0)
+_Singleton("devil_check_controlpanel", 0)
 
 ; Variables
 Local $Password = "qwerty" ; There must be a password for accessing the command panel!
+Global $ClientID = ""
+
+; Exit hotkey
+HotKeySet("{ESC}", "FastClosing")
 
 ; Password protection
 Local $Entered_Password = InputBox("Devil ControlPanel", "Enter the password to access the control panel!", "", "*", 270, 130)
@@ -66,7 +70,7 @@ While True
 		Case $GUI_EVENT_CLOSE
 			Exit
         Case $ShowMessageBox_Button
-            MsgBox($MB_ICONERROR, "Devil Control Panel", $InputBox)
+            ShowMessageBox()
         Case $ExecuteToCMD_Button
         Case $Shutdown_Button
         Case $LoadFile_Button
@@ -79,3 +83,25 @@ While True
 WEnd
 
 ; ------------------------------------------------------------------------------
+
+; Show message box
+Func ShowMessageBox()
+    $ClientID = GUICtrlRead($InputBox)
+    If $ClientID = "" Then
+        MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
+    Else
+        FileCopy("Data_example.ini", $Server_Directory & "\" & $ClientID & "_temp")
+        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+        Local $MessageBox_Text = InputBox("Devil ControlPanel", "Enter the text that will be displayed.", "", "", 270, 130)
+        IniWrite($Server_Directory & "\" & $ClientID & "_temp", "Data", "Type", "show_message")
+        IniWrite($Server_Directory & "\" & $ClientID & "_temp", "Data", "Command", $MessageBox_Text)
+        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+        Sleep(1000) 
+    EndIf
+EndFunc
+
+Func FastClosing()
+    Exit
+EndFunc

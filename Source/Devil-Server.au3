@@ -12,7 +12,7 @@
 #include <MsgBoxConstants.au3>
 
 ; The program will not start twice
-_Singleton("devil_check", 0)
+_Singleton("devil_check_server", 0)
 
 ; Read config file
 Global $Config_ClientID = IniRead("config.ini", "Config", "ClientID", "defective_client")
