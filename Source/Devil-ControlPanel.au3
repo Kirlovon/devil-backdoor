@@ -60,7 +60,7 @@ GUISetState(@SW_SHOW)
 
 ; Loop
 While True
-    Sleep(1)
+    Sleep(10)
 	$GUICommand = GUIGetMsg()
 	Switch $GUICommand
 		Case $GUI_EVENT_CLOSE
