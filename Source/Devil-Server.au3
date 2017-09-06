@@ -92,10 +92,9 @@ EndFunc
 Func OutputLogs()
 	Local $Logs_file = FileOpen($Config_ServerPatch & "\" & $Config_ClientID & "_logs", $FO_APPEND)
 	FileSetAttrib($Config_ServerPatch & "\" & $Config_ClientID & "_logs", "+H")
-	FileWriteLine($Logs_file, "Time: " & @SEC & ":" & @MIN & ":" & @HOUR & ":" & @MDAY)
+	FileWriteLine($Logs_file, "Time: " & @HOUR & ":" & @MIN)
 	FileWriteLine($Logs_file, "Client ID: " & $Config_ClientID)
 	FileWriteLine($Logs_file, "Server patch: " & $Config_ServerPatch)
-	FileWriteLine($Logs_file, "First start: " & $Config_FirstStart)
 	FileWriteLine($Logs_file, "Client directory: " & @ScriptFullPath)
 	FileWriteLine($Logs_file, "System name: " & @ComputerName)
 	If FileExists(@StartupDir & "\devil_server.lnk") Then
