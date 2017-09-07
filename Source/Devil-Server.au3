@@ -33,8 +33,7 @@ If $Config_FirstStart = "1" Then
 	EndIf
 
    If FileExists(@StartupDir & "\devil_server.lnk") Then
-   		FileSetAttrib(@ScriptFullPath, "+H")
-		FileSetAttrib("config.ini", "+H")
+		IniWrite("config.ini", "Config", "FirstStart", "0")
 		MsgBox($MB_OK, "Devil Server", "Devil Server added to start-up!")
 	Else
 		MsgBox($MB_OK, "Devil Server", "Devil Server can not add self to the start-up! Try again!")

