@@ -1,4 +1,4 @@
--# ![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
+# ![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
 
 This is a simple backdoor made to control computers in various public places, like school library, internet café, and so on.
 
@@ -35,6 +35,6 @@ Run **Devil-ControlPanel.exe** and enter the password specified in the code. (De
 Next, in the window that appears, select the shared folder. When the interface appears, in the inputbox type the _ClientID_ to which you want to send the command. (You can enter _PublicData_ or click on _ClientID_ text to send the command to all clients)
 
 ***
-###### DevilBackdoor project is for informational purposes only! You take full responsibility for using this sofware!
+###### Devil-Backdoor project is for informational purposes only! You take full responsibility for using this sofware!
 ***
 
