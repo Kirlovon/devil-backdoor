@@ -21,18 +21,18 @@ Now, you must fill **config.ini** file:
 [Config]
 ClientID=Test     # There must be an ID (Any meaning or word)
 ServerPatch=C:\     # There must be the path to the shared folder
-AddToStartup=True     # There must be True or False
-Speed=50     # The smaller, the more often the shared folder will be scanned
+AddToStartup=True     # Put there True or False
+Speed=50     # The time that the server will wait for nex data file check
 ```
 
-Save the file, and run **Devil-Server.exe** file! If you put 1 in the **AddToStartup=True**, after start you should see "_**Devil Server added to start-up**_" message.
+Save the config file, and run **Devil-Server.exe** file! If you put **True** in the **AddToStartup**, after start you should see "_**Devil Server added to start-up**_" message.
 
 
 
 ### 2. Control Panel using
 
 Run **Devil-ControlPanel.exe** and enter the password specified in the code. (Default is _QWERTY_)
-Next, in the window that appears, select the shared folder. When the interface appears, in the inputbox type the _ClientID_ to which you want to send the command. (You can enter _PublicData_ or click on _ClientID_ text to send the command to all clients)
+Next, in the window that appears, select the shared folder. When the interface appears, in the inputbox type the _ClientID_ to select client, that will receive the command. (You can enter _PublicData_ or click on _ClientID_ text to send the command to all clients)
 
 ***
 ###### Devil-Backdoor project is for informational purposes only! You take full responsibility for using this sofware!
