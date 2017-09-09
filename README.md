@@ -11,7 +11,7 @@ This is a simple backdoor made to control computers in various public places, li
 * **Block Task Manager** - allows you to block the task manager. This feature can be used to prevent server disconnection.
 
 ## How to use it?
-#### [Download](https://github.com/Kirlovon/Devil-Backdoor/releases/edit/Beta)
+#### [Download](https://github.com/Kirlovon/Devil-Backdoor/releases)
 ### 1. Server setup
 
 First, you need to make sure that all computers are connected to the same shared folder. You must put the **Devil-Server.exe** _(You can rename this file for something less troubling)_ and the **config.ini** _(This file can not be renamed)_ in the same folder, at any place on the hard drive of the computer. 
