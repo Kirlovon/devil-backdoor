@@ -21,7 +21,6 @@ Now, you must fill **config.ini** file:
 [Config]
 ClientID=Client     # There must be an ID (Any meaning or word)
 ServerPatch=C:\     # There must be the path to the shared folder
-<<<<<<< HEAD
 ControlPanelPatch=Devil-ControlPanel.exe    # There must be the path to the Control Panel
 AddToStartup=True     # Put there True or False
 Speed=50     # The time that the server will wait for nex data file check
