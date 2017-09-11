@@ -2,7 +2,7 @@
  
  Devil Server ( School Backdoor )
  AutoIt Version: 3.3.14.2
- Version: Beta 2 ( 17:09 11.09.2017)
+ Version: Beta 2.5 ( 20:45 11.09.2017)
 
 #ce ----------------------------------------------------------------------------
 
@@ -141,5 +141,5 @@ EndFunc
 
 ; Run Control Panel using hotkeys
 Func RunControlPanel()
-	Run("Devil-ControlPanel.au3")
+	Run($Config_ControlPanelPatch)
 EndFunc
