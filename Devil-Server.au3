@@ -18,7 +18,7 @@ _Singleton("devil_check_server", 0)
 ; Read config file
 Global $Config_ClientID = IniRead("config.ini", "Config", "ClientID", "defective_client")
 Global $Config_ServerPatch = IniRead("config.ini", "Config", "ServerPatch", "C:\")
-Global $Config_ControlPanelPatch = IniRead("config.ini", "Config", "ControlPanelPatch", "Devil-ControlPanel x32.exe")
+Global $Config_ControlPanelPatch = IniRead("config.ini", "Config", "ControlPanelPatch", "Devil-ControlPanel.exe")
 Global $Config_AddToStartup = IniRead("config.ini", "Config", "AddToStartup", "False")
 Global $Config_Speed = IniRead("config.ini", "Config", "Speed", "10")
 
