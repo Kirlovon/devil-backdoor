@@ -1,4 +1,4 @@
-# ![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
+ # ![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
 
 This is a simple backdoor made to control computers in various public places, like school library, internet café, and so on.
 
@@ -11,7 +11,7 @@ This is a simple backdoor made to control computers in various public places, li
 * **Block Task Manager** - allows you to block the task manager. This feature can be used to prevent server disconnection.
 
 ## How to use it?
-
+#### [Download](https://github.com/Kirlovon/Devil-Backdoor/releases)
 ### 1. Server setup
 
 First, you need to make sure that all computers are connected to the same shared folder. You must put the **Devil-Server.exe** _(You can rename this file for something less troubling)_ and the **config.ini** _(This file can not be renamed)_ in the same folder, at any place on the hard drive of the computer. 
@@ -19,22 +19,23 @@ First, you need to make sure that all computers are connected to the same shared
 Now, you must fill **config.ini** file:
 ```ini
 [Config]
-ClientID=Test     # There must be an ID (Any meaning or word)
+ClientID=Client     # There must be an ID (Any meaning or word)
 ServerPatch=C:\     # There must be the path to the shared folder
-AddToStartup=True     # There must be True or False
-Speed=50     # The smaller, the more often the shared folder will be scanned
+ControlPanelPatch=Devil-ControlPanel.exe    # There must be the path to the Control Panel
+AddToStartup=True     # Put there True or False
+Speed=50     # The time that the server will wait for nex data file check
 ```
 
-Save the file, and run **Devil-Server.exe** file! If you put 1 in the **AddToStartup=True**, after start you should see "_**Devil Server added to start-up**_" message.
+Save the config file, and run **Devil-Server.exe** file! If you put **True** in the **AddToStartup**, after start you should see "_**Devil Server added to start-up**_" message.
 
 
 
 ### 2. Control Panel using
 
-Run **Devil-ControlPanel.exe** and enter the password specified in the code. (Default is _QWERTY_)
-Next, in the window that appears, select the shared folder. When the interface appears, in the inputbox type the _ClientID_ to which you want to send the command. (You can enter _PublicData_ or click on _ClientID_ text to send the command to all clients)
+Run **Devil-ControlPanel.exe** _( If you fill **ControlPanelPatch** option in config file, you can press Hotkey to run Control Panel. Default hotkey is **PAUSE** )_ and enter the password specified in the code. (Default is _QWERTY_)
+Next, in the window that appears, select the shared folder. When the interface appears, in the inputbox type the _ClientID_ to select client, that will receive the command. (You can enter _PublicData_ or click on _ClientID_ text to send the command to all clients)
 
 ***
-###### DevilBackdoor project is for informational purposes only! You take full responsibility for using this sofware!
+###### Devil-Backdoor project is for informational purposes only! You take full responsibility for using this sofware!
 ***
 
