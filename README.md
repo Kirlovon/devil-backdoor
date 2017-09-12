@@ -34,7 +34,7 @@ Save the config file, and run **Devil-Server.exe** file! If you put **True** in 
 
 Run **Devil-ControlPanel.exe** _( If you fill **ControlPanelPatch** option in config file, you can press Hotkey to run Control Panel. Default hotkey is **PAUSE** )_ and enter the password specified in the code. (Default is _QWERTY_)
 Run **Devil-ControlPanel.exe** and enter the password specified in the code. (Default is _QWERTY_)
-Next, in the window that appears, select the shared folder. When the interface appears, in the inputbox type the _ClientID_ to select client, that will receive the command. (You can enter _PublicData_ or click on _ClientID_ text to send the command to all clients)
+Next, in the window that appears, select the shared folder. When the interface appears, in the inputbox type the _ClientID_ to select client, that will receive the command.
 
 ***
 ###### Devil-Backdoor project is for informational purposes only! You take full responsibility for using this sofware!
