@@ -1,4 +1,4 @@
- # ![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
+# ![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
 
 This is a simple backdoor made to control computers in various public places, like school library, internet café, and so on.
 
@@ -23,7 +23,7 @@ ClientID=Client     # There must be an ID (Any meaning or word)
 ServerPatch=C:\     # There must be the path to the shared folder
 ControlPanelPatch=Devil-ControlPanel.exe    # There must be the path to the Control Panel
 AddToStartup=True     # Put there True or False
-Speed=50     # The time that the server will wait for nex data file check
+Speed=50     # The time that the server will wait for next data file check
 ```
 
 Save the config file, and run **Devil-Server.exe** file! If you put **True** in the **AddToStartup**, after start you should see "_**Devil Server added to start-up**_" message.
