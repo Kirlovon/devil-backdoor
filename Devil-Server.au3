@@ -132,5 +132,5 @@ EndFunc
 
 ; Run Control Panel using hotkeys
 Func RunControlPanel()
-	Run($Config_ControlPanelPatch)
+   Run($Config_ControlPanelPatch)
 EndFunc
