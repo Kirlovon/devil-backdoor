@@ -1,4 +1,4 @@
-,# ![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
+![Devil Logo](https://cdn4.iconfinder.com/data/icons/free-game-icons/32/Devil.png) Devil Backdoor 
 
 This is a simple backdoor made to control computers in various public places, like school library, internet café, and so on.
 
