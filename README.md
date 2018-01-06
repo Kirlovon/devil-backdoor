@@ -23,15 +23,15 @@ First, you need to make sure that all computers are connected to the same shared
 Now, you must fill **config.ini** file:
 ```ini
 [Config]
+
 ClientID=Client     # There must be an ID (Any meaning or word)
 ServerPatch=C:\     # There must be the path to the shared folder
-ControlPanelPatch=Devil-ControlPanel.exe    # There must be the path to the Control Panel
+ControlPanelPatch=Devil-ControlPanel.exe    # There must be the path to the Control Panel ( Optional )
 AddToStartup=True     # Put there True or False
 Speed=50     # The time that the server will wait for next data file check
 ```
 
-Save the config file, and run **Devil-Server.exe** file! If you put **True** in the **AddToStartup**, after start you should see "_**Devil Server added to start-up**_" message.
-
+Save config file, and run **Devil-Server.exe**! If you put **True** in the **AddToStartup**, after start you should see "_**Devil Server added to start-up**_" message.
 
 
 ### 2. Control Panel using
