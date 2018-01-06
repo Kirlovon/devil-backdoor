@@ -1,5 +1,9 @@
 # ![Devil Logo](https://github.com/Kirlovon/Devil-Backdoor/raw/master/icon.ico) Devil Backdoor 
 
+[![license](https://img.shields.io/github/license/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor/blob/master/LICENSE)
+[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor/commits/master)
+
 This is a simple backdoor made to control computers in various public places, like school library, internet café, and so on.
 
 ## Features
