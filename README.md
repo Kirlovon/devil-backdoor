@@ -47,6 +47,6 @@ Next, in the window that appears, select the shared folder. When the interface a
 In **Build** folder you can find 2 files: **build_x86.cmd** and **build_x64.cmd**. Run one of this files, to build backdoor.
 
 ***
-###### Devil-Backdoor project is for informational purposes only! You take full responsibility for using this sofware!
+###### Devil-Backdoor project is for informational purposes only! You take full responsibility for using this software!
 ***
 
