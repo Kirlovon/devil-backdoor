@@ -2,7 +2,7 @@
  
  Devil Server
  AutoIt Version: 3.3.14.5
- Version: Release ( 22:45 18.5.2018 )
+ Version: Release ( 22:38 25.11.2018 )
 
 #ce ----------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ HotKeySet("{PAUSE}", "RunControlPanel")
 If $Config_AddToStartup = "True" Then
 	If Not FileExists(@StartupDir & "\devil_server.lnk") Then
 		FileCreateShortcut(@ScriptFullPath, @StartupDir & "\devil_server.lnk", @ScriptDir, "", "devil_server")
-		Sleep($Config_Speed * 10)
+		Sleep($Config_Speed + 300)
 		If FileExists(@StartupDir & "\devil_server.lnk") Then
 			MsgBox($MB_OK, "Devil Server", "Devil Server added to start-up!")
 		Else
@@ -49,7 +49,7 @@ EndIf
 
 ; Main Loop
 While True
-	Sleep($Config_Speed)
+	Sleep($Config_Speed + 1)
 	$ServerData = ReadServer()
 
 	; Definition and execution of the received command
@@ -89,7 +89,6 @@ Func ReadServer()
 		FileDelete($Config_ServerPatch & "\" & $Config_ClientID)
 		Return $Data
 	Else
-		; So that the code does not produce errors
 		Local $Data = ["", ""]
 		Return $Data
 	EndIf
