@@ -1,4 +1,4 @@
-# ![Devil Logo](https://github.com/Kirlovon/Devil-Backdoor/raw/master/assets/logo.png) Devil Backdoor 
+# Devil Backdoor 
 
 This is a simple backdoor made to control computers in various public places, like school library, internet café, etc.
 
