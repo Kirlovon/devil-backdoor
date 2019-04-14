@@ -21,7 +21,7 @@ This is a simple backdoor made to control computers in various public places, li
 
 ### 1. Server setup
 
-First, you need to make sure that all computers are connected to the same shared folder. You must put the **Devil-Server.exe** _(You can rename this file for something less troubling)_ and the **config.ini** _(This file can not be renamed)_ in the same folder, at any place on the hard drive of the computer. 
+First, **you need to make sure that all computers are connected to the same shared folder.** You must put the **Devil-Server.exe** _(You can rename this file for something less troubling)_ and the **config.ini** _(This file can not be renamed)_ in the same folder, at any place on the hard drive of the computer. 
 
 Now, you must fill **config.ini** file:
 ```ini
@@ -34,7 +34,7 @@ AddToStartup=True     # Put there True or False
 Speed=50     # The time that the server will wait for next data file check
 ```
 
-Save config file, and run **Devil-Server.exe**! If you put **True** in the **AddToStartup**, after start you should see "_**Devil Server added to start-up**_" message.
+Save config file, and run **Devil-Server.exe**! If you put **True** in the **AddToStartup**, after start you should see "_Devil Server added to start-up_" message.
 
 
 ### 2. Control Panel using
