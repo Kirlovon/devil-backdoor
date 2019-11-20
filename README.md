@@ -2,7 +2,7 @@
 
 This is a simple backdoor made to control computers in various public places, like school library, internet café, etc.
 
- ![Devil Logo](https://github.com/Kirlovon/Devil-Backdoor/raw/master/assets/preview.png)
+ ![Devil Preview](https://github.com/Kirlovon/Devil-Backdoor/raw/master/assets/preview.png)
 
 [![license](https://img.shields.io/github/license/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor/blob/master/LICENSE)
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/Kirlovon/Devil-Backdoor.svg)](https://github.com/Kirlovon/Devil-Backdoor)
