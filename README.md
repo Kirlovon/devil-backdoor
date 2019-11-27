@@ -37,7 +37,7 @@ Speed=50     # The time that the server will wait for next data file check
 Save config file, and run **Devil-Server.exe**! If you put **True** in the **AddToStartup**, after start you should see "_Devil Server added to start-up_" message.
 
 
-### 2. Control Panel using
+### 2. Control Panel usage
 
 Run **Devil-ControlPanel.exe**.
 If you fill **ControlPanelPatch** option in config file, you can press Hotkey to run Control Panel, _( Default hotkey is **PAUSE** )_ and enter the password specified in the code. _(Default is **QWERTY**)_ <br/>
